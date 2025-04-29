@@ -11,31 +11,22 @@
     <link rel="stylesheet" href="./css/standard.css">
     <link rel="stylesheet" href="./css/icons.css">
     <link rel="stylesheet" href="./css/buttons.css">
+    <link rel="stylesheet" href="./css/media.css">
 
     <script src="./js/script.js"></script>
     <script src="./js/template.js"></script>
 </head>
 <body onload="init()">
-  <div id="overlay" class="overlay d_none">
+  <div id="overlay" class="overlay d_none" onclick="closeOverlay(event)">
     <div id="dialog" class="dialog">
-        <img onclick="closeOverlay()" class="closeIcon" src="./assets/imgs/icons8-x-50.png" alt="CloseWindow">
+        <img onclick="closeOverlay(event)" class="closeIcon" src="./assets/imgs/icons8-x-50.png" alt="CloseWindow">
       <div id="dialogContent"></div>
     </div>
   </div>
 
     <header class="paddingBox">
         <div class="pokeBox">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40">
-                <style>
-                  @keyframes rotate {
-                    from { transform: rotate(0deg); }
-                    to { transform: rotate(360deg); }
-                  }
-                  .pokeball {
-                    animation: rotate 2s linear infinite;
-                    transform-origin: 50% 50%;
-                  }
-                </style>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="pokeball-icon">
                 <g class="pokeball">
                   <!-- Obere Hälfte (rot) -->
                   <path d="M50,5 a45,45 0 1,1 0,90" fill="red" stroke="black" stroke-width="3"/>
@@ -66,7 +57,7 @@
     </main>
 
     <footer class="paddingBox">
-        Impressum
+        <a href="" target="_blank">Impressum</a>
     </footer>
 
 

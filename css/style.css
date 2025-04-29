@@ -10,6 +10,22 @@
     padding-right: 80px;
 }
 
+.pokeball-icon {
+    width: 2em;
+    max-width: 80px;
+    height: auto;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+.pokeball {
+    animation: rotate 2s linear infinite;
+    transform-origin: 50% 50%;
+}
+
 .pokemon{
     display: flex;
     text-align: center;
@@ -77,6 +93,7 @@ p{
     color: white;
     padding: 12px;
     font-size: large;
+    cursor: default;
 }
 
 .loadMore{
@@ -167,6 +184,7 @@ p{
 }
 
 .stat-label {
+    text-align: left;
     width: 200px;
     font-weight: bold;
     text-transform: uppercase;
@@ -239,4 +257,29 @@ p{
 
 .evo-arrow:hover{
     cursor: default;
+}
+
+.arrow-line {
+    font-family: monospace;
+    font-size: 32px;
+    color: cyan;
+    letter-spacing: -9px;
+    font-weight: bolder;
+    display: inline-block;
+    transition: transform 0.3s ease;
+    cursor: default;
+}
+  
+.arrow-line:hover {
+    transform: scale(1.1);
+    color: rgb(2, 204, 204);
+}
+
+.arrowsOverlay {
+    margin-left: -42px;
+    margin-top: -124px;
+    width: 475px;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
 }

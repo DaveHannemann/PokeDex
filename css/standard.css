@@ -20,6 +20,7 @@ body{
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    overflow: hidden;
 }
 
 .d_none{
@@ -84,4 +85,15 @@ footer{
     display: flex;
     color: white;
     flex-shrink: 0;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+a:hover{
+    color: cyan;
+    filter: saturate(200%);
+    transform: scale(1.1);
 }

@@ -35,9 +35,9 @@ async function showPokemon() {
         let content = document.getElementById("content");        
         content.innerHTML += renderPokemon(responseAsJson, allPokemon.length - 1);
         loadedCount++;
-        if (loadedCount === newPokemons) {
-            disableSpinner();
-        }
+            if (loadedCount === newPokemons) {
+                disableSpinner();
+            }
     }
 }
 
@@ -49,9 +49,9 @@ async function loadMorePokemon() {
         allPokemon.push(responseAsJson);        
         document.getElementById("content").innerHTML += renderPokemon(responseAsJson, allPokemon.length - 1);
         loadedCount++;
-        if (loadedCount === (newPokemons + currentIndex)) {
-            loader.classList.add("d_none");
-        }
+            if (loadedCount === (newPokemons + currentIndex)) {
+                loader.classList.add("d_none");
+            }
     }
     currentIndex += newPokemons + 1;
     preloadEvoChains();
@@ -61,9 +61,23 @@ function addOverlay(index) {
     let pokemon = allPokemon[index];
     let addOverlayRef = document.getElementById('overlay')
     let dialogContentRef = document.getElementById("dialogContent")
-    addOverlayRef.classList.remove('d_none')
+    addOverlayRef.classList.remove('d_none');
+    document.body.style.overflow = 'hidden';
     dialogContentRef.innerHTML = renderOverlayContent(pokemon, index);
     getInfo(index);
+}
+
+function nextImage(index) {
+    addOverlay(index + 1);
+}
+
+function prevImage(index) {
+    if (index === 0) {
+        addOverlay(currentIndex - 2)
+    }
+    else{
+        addOverlay(index - 1);
+    }
 }
 
 function getInfo(index) {
@@ -89,13 +103,11 @@ async function preloadEvoChains() {
         let evoChainData = await evoChainRef.json();
         let evoNames = [];
         let evo = evoChainData.chain;
-        do {
-            evoNames.push(evo.species.name);
-            evo = evo.evolves_to[0];
-        } while (evo && evo.hasOwnProperty('evolves_to'));
+            do {evoNames.push(evo.species.name);
+                evo = evo.evolves_to[0];
+            } while (evo && evo.hasOwnProperty('evolves_to'));
         pokemon.evolution = evoNames;
-    }
-}
+    }}
 
 async function getEvoChain(index){
     let pokemon = allPokemon[index];
@@ -108,45 +120,43 @@ async function renderEvoChain(names) {
     evoChainRef.innerHTML = '<div class="evolution-chain"></div>';
     let evoChainDiv = evoChainRef.querySelector('.evolution-chain');
     for (let i = 0; i < names.length; i++) {
-        const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${names[i]}`);
-        const evoPoke = await res.json();
-
-        evoChainDiv.innerHTML += `
-            <div class="evo-stage">
-                <img src="${evoPoke.sprites.other.home.front_default}" alt="${evoPoke.name}">
-            </div>
-            ${i < names.length - 1 ? '<span class="evo-arrow">➡️</span>' : ''}
-        `;}
+        let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${names[i]}`);
+        let evoPokemon = await response.json();
+        let evoHTML = showEvoChain(evoPokemon, i === names.length - 1);
+        evoChainDiv.innerHTML += evoHTML;
+    }
 }
 
 function filterPokemon() {
     let searchInput = document.getElementById('searchInput').value.trim().toLowerCase();
     let content = document.getElementById('content');
     if (searchInput.length < 3) {
-        content.innerHTML = allPokemon
-            .slice(0, loadedCount)
-            .map((pokemon, index) => renderPokemon(pokemon, index))
-            .join('');
+        showFilteredPokemon(allPokemon.slice(0, loadedCount));
+        loadMore.classList.remove("d_none");
         return;
     }
     let filteredPokemon = allPokemon
-        .slice(0, loadedCount)
-        .filter(pokemon => pokemon.name.toLowerCase().includes(searchInput));
-
-    content.innerHTML = filteredPokemon
-        .map((pokemon, index) => renderPokemon(pokemon, allPokemon.indexOf(pokemon)))
-        .join('');
+    .slice(0, loadedCount)
+    .filter(pokemon => pokemon.name.toLowerCase().includes(searchInput));
+    showFilteredPokemon(filteredPokemon);
 }
 
-function closeOverlay() {
-    let addOverlayRef = document.getElementById('overlay')
-    addOverlayRef.classList.add('d_none')
+function showFilteredPokemon(pokemonList) {
+    let content = document.getElementById('content');
+    let loadMore = document.getElementById('loadMore');
+    loadMore.classList.add("d_none");
+    content.innerHTML = pokemonList
+    .map((pokemon) => renderPokemon(pokemon, allPokemon.indexOf(pokemon)))
+    .join('');
 }
 
-function getTypeIcon(typeName) {
-    return `<span class="icon ${typeName}">${svgIcons[typeName]}</span>`;
+function closeOverlay(event) {
+    let addOverlayRef = document.getElementById('overlay');
+    if(event.target === addOverlayRef || event.target.classList.contains('closeIcon')){
+    addOverlayRef.classList.add('d_none');
+    document.body.style.overflow = '';
+    }
 }
-
 
 async function preloadTypeIcons() {
     let types = [
@@ -164,27 +174,19 @@ async function preloadTypeIcons() {
 
 function getStatColor(statName) {
     switch (statName.toLowerCase()) {
-        case 'hp': return '#4CAF50';       // Grün
-        case 'attack': return '#F44336';   // Rot
-        case 'defense': return '#2196F3';  // Blau
-        case 'special-attack': return '#9C27B0'; // Lila
-        case 'special-defense': return '#3F51B5'; // Dunkelblau
-        case 'speed': return '#FFEB3B';    // Gelb
-        default: return '#9E9E9E';         // Grau
+        case 'hp': return '#4CAF50';
+        case 'attack': return '#F44336';
+        case 'defense': return '#2196F3';
+        case 'special-attack': return '#9C27B0'; 
+        case 'special-defense': return '#3F51B5'; 
+        case 'speed': return '#FFEB3B';   
+        default: return '#9E9E9E';
     }
 }
 
 function renderStatBar(statName, statValue) {
     let percentage = (statValue / 299) * 100;
     let color = getStatColor(statName);
-    
-    return `
-        <div class="stat-row">
-            <div class="stat-label">${statName.toUpperCase()}</div>
-            <div class="stat-bar">
-            <div class="stat-fill" style="width: ${percentage}%; background-color: ${color};"></div>
-            </div>
-        </div>
-    `;
+    return getStatBarFill(statName, percentage, color);
 }
 
