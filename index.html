@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex</title>
+
+    <link rel="shortcut icon" href="./assets/icons/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/standard.css">
+    <link rel="stylesheet" href="./css/icons.css">
+    <link rel="stylesheet" href="./css/buttons.css">
+
+    <script src="./js/script.js"></script>
+    <script src="./js/template.js"></script>
+</head>
+<body onload="init()">
+  <div id="overlay" class="overlay d_none">
+    <div id="dialog" class="dialog">
+        <img onclick="closeOverlay()" class="closeIcon" src="./assets/imgs/icons8-x-50.png" alt="CloseWindow">
+      <div id="dialogContent"></div>
+    </div>
+  </div>
+
+    <header class="paddingBox">
+        <div class="pokeBox">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40">
+                <style>
+                  @keyframes rotate {
+                    from { transform: rotate(0deg); }
+                    to { transform: rotate(360deg); }
+                  }
+                  .pokeball {
+                    animation: rotate 2s linear infinite;
+                    transform-origin: 50% 50%;
+                  }
+                </style>
+                <g class="pokeball">
+                  <!-- Obere Hälfte (rot) -->
+                  <path d="M50,5 a45,45 0 1,1 0,90" fill="red" stroke="black" stroke-width="3"/>
+                  <!-- Untere Hälfte (weiß) -->
+                  <path d="M50,95 a45,45 0 1,1 0,-90" fill="white" stroke="black" stroke-width="3"/>
+                  <!-- Trennlinie (90 Grad gedreht) -->
+                  <path d="M50,5 v90" stroke="black" stroke-width="5" fill="none"/>
+                  <!-- Zentrumskreis -->
+                  <circle cx="50" cy="50" r="10" fill="white" stroke="black" stroke-width="3"/>
+                  <circle cx="50" cy="50" r="5" fill="black"/>
+                </g>
+              </svg>
+              
+            <h1>Pokedex</h1>
+        </div>
+        <div class="searchBox">
+            <input type="text" id="searchInput" placeholder="PokéSearch" oninput="filterPokemon()">
+        </div>
+    </header>
+    <main class="paddingBox">
+        <div id="loader" class="poke-loader d_none">
+          <div class="pokeball"></div>
+          <p>More Pokémon incoming...</p>
+        </div>
+      <section class="d_none" id="content">
+      </section>
+        <button class="loadMore d_none" id="loadMore" onclick="loadMorePokemon()">Load More Pokémon</button>
+    </main>
+
+    <footer class="paddingBox">
+        Impressum
+    </footer>
+
+
+</body>
+</html>

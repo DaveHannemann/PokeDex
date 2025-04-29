@@ -1,0 +1,242 @@
+.pokeBox{
+    padding-left: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.searchBox{
+    padding-right: 80px;
+}
+
+.pokemon{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    padding:16px;
+}
+
+.pokemon_char{
+    width: 125px;
+}
+
+.pokemon_char:hover{
+    filter: drop-shadow(6px 6px 6px white);
+    cursor: pointer;
+}
+
+.pokemon_char_dialog{
+    width: 250px;
+}
+
+.pokemon_char_dialog:hover{
+    filter: drop-shadow(6px 6px 6px white);
+}
+
+.dialog_h{
+    font-size: 32px;
+    border-top-left-radius: 0%;
+    border-top-right-radius: 0%;
+}
+
+.types{
+    background-color:  #0a2b36;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    padding: 8px;
+}
+
+.button_dialog {
+    height: 40px;
+    width: 128px;
+    color: hsla(0, 0%, 13%, 1);
+    background-color: cyan;
+    font-size: large;
+    font-weight: bolder;
+}
+
+.button_dialog:hover{
+    cursor: pointer;
+    filter: saturate(1.5);
+    transform: scale(1.1);
+}
+
+.menu_box{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.dialogBox{
+    height: 180px;
+}
+
+p{
+    color: white;
+    padding: 12px;
+    font-size: large;
+}
+
+.loadMore{
+    background-color: #0a2b36;
+    color: white;
+    font-size: large;
+    height: 50px;
+    width: 200px;
+    margin-bottom: 24px;
+}
+
+.loadMore:hover{
+    filter: saturate(200%);
+    transform: scale(1.1);
+}
+
+.poke-loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    z-index: 999;
+    background-color: #05161D;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #2c2c2c;
+}
+
+.pokeball {
+    width: 60px;
+    height: 60px;
+    background: white;
+    border: 4px solid black;
+    border-radius: 50%;
+    position: relative;
+    animation: spin 1s linear infinite;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.pokeball::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: red;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom: 2px solid black;
+}
+
+.pokeball::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border: 3px solid black;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.stats{
+    padding: 8px;
+}
+
+.stat-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    width: 200px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
+}
+
+.stat-bar {
+    flex: 1;
+    background-color: #eee;
+    border-radius: 12px;
+    height: 16px;
+    overflow: hidden;
+    position: relative;
+}
+
+.stat-fill {
+    height: 100%;
+    border-radius: 12px 0 0 12px;
+    transition: width 0.3s ease;
+}
+
+.stat-value {
+    width: 40px;
+    text-align: right;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.closeIcon{
+    margin-top: 46px;
+    margin-left: 154px;
+    position: absolute;
+}
+
+.closeIcon:hover{
+    cursor:pointer;
+    filter: saturate(200%);
+    transform: scale(1.1);
+}
+
+.evolution-chain {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.evo-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-transform: capitalize;
+}
+
+.evo-stage img {
+    width: 80px;
+    height: 160px;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+}
+
+.evo-stage img:hover {
+    transform: scale(1.1);
+}
+
+.evo-arrow {
+    font-size: 1.5rem;
+}
+
+.evo-arrow:hover{
+    cursor: default;
+}

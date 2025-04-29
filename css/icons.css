@@ -1,0 +1,92 @@
+.icon {
+    display: inline-flex;
+    height: 35px;
+    width: 35px;
+    transition: 200ms all;
+}
+
+.icon:hover{
+    filter: saturate(200%);
+    transform: scale(1.1);
+}
+
+.icon:hover svg {
+    filter: drop-shadow(0 0 5px currentColor);
+}
+
+.icon svg{
+    width: 100%;
+    height: 100%;
+}
+
+.icon.bug {
+    color: #92BC2C;
+}
+
+.icon.dark {
+    color: #595761;
+}
+
+.icon.dragon {
+    color: #0C69C8;
+}
+
+.icon.electric {
+    color: #F2D94E;
+}
+
+.icon.fire {
+    color: #FBA54C;
+}
+
+.icon.fairy {
+    color: #EE90E6;
+}
+
+.icon.fighting {
+    color: #D3425F;
+}
+
+.icon.flying {
+    color: #A1BBEC;
+}
+
+.icon.ghost {
+    color: #5F6DBC;
+}
+
+.icon.grass {
+    color: #5FBD58;
+}
+
+.icon.ground {
+    color: #DA7C4D;
+}
+
+.icon.ice {
+    color: #75D0C1;
+}
+
+.icon.normal {
+    color: #A0A29F;
+}
+
+.icon.poison {
+    color: #B763CF;
+}
+
+.icon.psychic {
+    color: #FA8581;
+}
+
+.icon.rock {
+    color: #C9BB8A;
+}
+
+.icon.steel {
+    color: #5695A3;
+}
+
+.icon.water {
+    color: #539DDF;
+}
