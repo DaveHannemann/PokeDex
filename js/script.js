@@ -5,7 +5,7 @@ let svgIcons = {};
 let allPokemon = [];
 let loadedCount = 0;
 let newPokemons = 20;
-let currentIndex = 21;
+let currentIndex = 1;
 
 
 async function init() {
@@ -28,32 +28,17 @@ function disableSpinner() {
   
 async function showPokemon() {
     loadingSpinner();
-    for (let index = 1; index <= newPokemons; index++) {
+    for (let index = currentIndex; index <= currentIndex + newPokemons; index++) {
         let response = await fetch(BASE_URL + index)
         let responseAsJson = await response.json();
         allPokemon.push(responseAsJson);
         let content = document.getElementById("content");        
         content.innerHTML += renderPokemon(responseAsJson, allPokemon.length - 1);
         loadedCount++;
-            if (loadedCount === newPokemons) {
-                disableSpinner();
-            }
-    }
-}
-
-async function loadMorePokemon() {
-    loadingSpinner();
-    for (let index = currentIndex; index <= currentIndex + newPokemons; index++) {
-        let response = await fetch(BASE_URL + index)
-        let responseAsJson = await response.json();
-        allPokemon.push(responseAsJson);        
-        document.getElementById("content").innerHTML += renderPokemon(responseAsJson, allPokemon.length - 1);
-        loadedCount++;
             if (loadedCount === (newPokemons + currentIndex)) {
-                loader.classList.add("d_none");
+                disableSpinner();}
             }
-    }
-    currentIndex += newPokemons + 1;
+    currentIndex += newPokemons;
     preloadEvoChains();
 }
 

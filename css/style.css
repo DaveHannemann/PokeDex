@@ -189,6 +189,7 @@ p{
     font-weight: bold;
     text-transform: uppercase;
     color: white;
+    cursor: default;
 }
 
 .stat-bar {
@@ -276,9 +277,9 @@ p{
 }
 
 .arrowsOverlay {
-    margin-left: -42px;
-    margin-top: -124px;
-    width: 475px;
+    margin-left: -13px;
+    margin-top: -420px;
+    width: 417px;
     position: absolute;
     display: flex;
     justify-content: space-between;
