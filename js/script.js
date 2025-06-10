@@ -5,7 +5,7 @@ let svgIcons = {};
 let allPokemon = [];
 let loadedCount = 0;
 let newPokemons = 20;
-let currentIndex = 1;
+let currentIndex = 0;
 
 
 async function init() {
@@ -28,7 +28,7 @@ function disableSpinner() {
   
 async function showPokemon() {
     loadingSpinner();
-    for (let index = currentIndex; index <= currentIndex + newPokemons; index++) {
+    for (let index = (currentIndex + 1); index <= currentIndex + newPokemons; index++) {
         let response = await fetch(BASE_URL + index)
         let responseAsJson = await response.json();
         allPokemon.push(responseAsJson);
@@ -53,12 +53,17 @@ function addOverlay(index) {
 }
 
 function nextImage(index) {
-    addOverlay(index + 1);
+    if (index === newPokemons) {
+        addOverlay((currentIndex - newPokemons) - 1)
+    }
+    else{
+        addOverlay(index + 1);
+    }
 }
 
 function prevImage(index) {
     if (index === 0) {
-        addOverlay(currentIndex - 2)
+        addOverlay(currentIndex - 1)
     }
     else{
         addOverlay(index - 1);
